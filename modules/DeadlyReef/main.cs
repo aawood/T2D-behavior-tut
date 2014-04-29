@@ -50,6 +50,8 @@ function DeadlyReef::create( %this )
     createAquariumEffects(mainScene);
 
     DeadlyReef.spawnPlayerFish();
+	for (%i = 0; %i < 2; %i++)
+		DeadlyReef.spawnFishFood();
 }
 
 //-----------------------------------------------------------------------------
@@ -90,4 +92,24 @@ function DeadlyReef::spawnPlayerFish(%this)
 	%fish.addBehavior(%controls);
 	
     mainScene.add( %fish ); 
+}
+
+function DeadlyReef::spawnFishFood()
+{
+
+	%food = new Sprite()
+	{
+		image = "TropicalAssets:bubble";
+		class = "FishFoodClass";
+		position = "20 20";
+		size = "3 3";
+		SceneLayer = "15";
+		SceneGroup = "10";
+		CollisionCallback = true;
+	};
+
+	%food.createPolygonBoxCollisionShape(5, 5);
+	%food.setCollisionShapeIsSensor(0, true);
+	%food.setCollisionGroups(15);
+	mainScene.add(%food);
 }
