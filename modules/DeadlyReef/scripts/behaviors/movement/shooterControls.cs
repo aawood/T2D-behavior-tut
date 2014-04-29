@@ -73,6 +73,8 @@ function ShooterControlsBehavior::onBehaviorRemove(%this)
 
 function ShooterControlsBehavior::updateMovement(%this)
 {
+	%flip = %this.right - %this.left < 0;
+	%this.owner.setFlipX(%flip);
     %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.horizontalSpeed);
     %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.verticalSpeed);
 }

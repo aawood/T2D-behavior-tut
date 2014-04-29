@@ -44,6 +44,7 @@ function DeadlyReef::create( %this )
     // load some scripts and variables
     // exec("./scripts/someScript.cs");
     exec("./scripts/aquarium.cs");
+	exec("./scripts./behaviors/movement/shooterControls.cs");
 
     buildAquarium(mainScene);
     createAquariumEffects(mainScene);
@@ -81,5 +82,12 @@ function DeadlyReef::spawnPlayerFish(%this)
     %fish.setCollisionShapeIsSensor(0, true);
     %fish.setCollisionGroups( "15" );
 
+	%controls = ShooterControlsBehavior.createInstance();
+	%controls.upKey = "keyboard W";
+	%controls.downKey = "keyboard S";
+	%controls.leftKey = "keyboard A";
+	%controls.rightKey = "keyboard D";
+	%fish.addBehavior(%controls);
+	
     mainScene.add( %fish ); 
 }
