@@ -44,7 +44,8 @@ function DeadlyReef::create( %this )
     // load some scripts and variables
     // exec("./scripts/someScript.cs");
     exec("./scripts/aquarium.cs");
-	exec("./scripts./behaviors/movement/shooterControls.cs");
+	exec("./scripts/behaviors/movement/shooterControls.cs");
+	exec("./scripts/behaviors/movement/drift.cs");
 
     buildAquarium(mainScene);
     createAquariumEffects(mainScene);
@@ -111,5 +112,9 @@ function DeadlyReef::spawnFishFood()
 	%food.createPolygonBoxCollisionShape(5, 5);
 	%food.setCollisionShapeIsSensor(0, true);
 	%food.setCollisionGroups(15);
+	
+	%move = DriftBehavior.createInstance();
+	%food.addBehavior(%move);
+	
 	mainScene.add(%food);
 }
