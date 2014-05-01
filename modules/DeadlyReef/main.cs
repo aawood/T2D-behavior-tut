@@ -46,6 +46,7 @@ function DeadlyReef::create( %this )
     exec("./scripts/aquarium.cs");
 	exec("./scripts/behaviors/movement/shooterControls.cs");
 	exec("./scripts/behaviors/movement/drift.cs");
+	exec("./scripts/behaviors/life/lifeTimer.cs");
 
     buildAquarium(mainScene);
     createAquariumEffects(mainScene);
@@ -91,6 +92,9 @@ function DeadlyReef::spawnPlayerFish(%this)
 	%controls.leftKey = "keyboard A";
 	%controls.rightKey = "keyboard D";
 	%fish.addBehavior(%controls);
+	
+	%life = LifeTimerBehavior.createInstance();
+	%fish.addBehavior(%life);
 	
     mainScene.add( %fish ); 
 }

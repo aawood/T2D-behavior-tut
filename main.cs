@@ -25,6 +25,8 @@ $Scripts::ignoreDSOs = true;
 
 ModuleDatabase.scanModules( "modules" );
 ModuleDatabase.LoadGroup( "game" );
+//mainScene.setDebugOn("aabb");
+//mainWindow.setCameraSize(200,150);
 
 //-----------------------------------------------------------------------------
 
