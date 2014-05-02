@@ -46,6 +46,7 @@ function DeadlyReef::create( %this )
     exec("./scripts/aquarium.cs");
 	exec("./scripts/behaviors/movement/shooterControls.cs");
 	exec("./scripts/behaviors/movement/drift.cs");
+	exec("./scripts/behaviors/movement/meander.cs");
 	exec("./scripts/behaviors/life/lifeTimer.cs");
 
     buildAquarium(mainScene);
