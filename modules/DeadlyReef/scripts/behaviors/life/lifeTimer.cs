@@ -51,6 +51,7 @@ function LifeTimerBehavior::die(%this)
 	%this.owner.setLinearVelocityX(0);
 	%this.owner.setLinearVelocityY(10);
 	%this.dead = true;
+	%this.owner.blockControls();
 }
 
 function LifeTimerBehavior::lowerLife(%this)
@@ -59,5 +60,14 @@ function LifeTimerBehavior::lowerLife(%this)
 	if(! %this.dead)
 	{
 		%this.schedule(%this.burnRate, "lowerLife");
+	}
+}
+
+function LifeTimerBehavior::onCollision(%this, %object, %collisionDetails)
+{
+	if (%object.class $= "FishFoodClass")
+	{
+		%this.modifyLife(%object.nutrition);
+		%object.recycle();
 	}
 }

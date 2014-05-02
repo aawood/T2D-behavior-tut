@@ -84,7 +84,7 @@ function DeadlyReef::spawnPlayerFish(%this)
 
     %fish.createPolygonBoxCollisionShape(%size);
     %fish.setCollisionShapeIsSensor(0, true);
-    %fish.setCollisionGroups( "15" );
+    %fish.setCollisionGroups( "10 15" );
 
 	%controls = ShooterControlsBehavior.createInstance();
 	%controls.upKey = "keyboard W";
@@ -121,4 +121,5 @@ function DeadlyReef::spawnFishFood()
 	%food.addBehavior(%move);
 	
 	mainScene.add(%food);
+	%food.nutrition = 10;
 }

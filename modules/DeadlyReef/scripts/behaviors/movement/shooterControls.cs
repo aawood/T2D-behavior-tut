@@ -73,10 +73,13 @@ function ShooterControlsBehavior::onBehaviorRemove(%this)
 
 function ShooterControlsBehavior::updateMovement(%this)
 {
-	%flip = %this.right - %this.left < 0;
-	%this.owner.setFlipX(%flip);
-    %this.owner.setLinearVelocityX((%this.right - %this.left) * %this.horizontalSpeed);
-    %this.owner.setLinearVelocityY((%this.up - %this.down) * %this.verticalSpeed);
+	if(!%this.override)
+	{
+		%flip = %this.right - %this.left < 0;
+		%this.owner.setFlipX(%flip);
+		%this.owner.setLinearVelocityX((%this.right - %this.left) * %this.horizontalSpeed);
+		%this.owner.setLinearVelocityY((%this.up - %this.down) * %this.verticalSpeed);
+	}	
 }
 
 function ShooterControlsBehavior::moveUp(%this, %val)
@@ -101,4 +104,9 @@ function ShooterControlsBehavior::moveRight(%this, %val)
 {
     %this.right = %val;
     %this.updateMovement();
+}
+
+function ShooterControlsBehavior::blockControls(%this)
+{
+	%this.override = true;
 }
