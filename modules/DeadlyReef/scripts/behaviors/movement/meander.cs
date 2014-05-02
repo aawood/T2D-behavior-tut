@@ -20,7 +20,7 @@ function MeanderBehavior::onCollision(%this, %object, %collisionDetails)
 	}
 }
 
-function MeanderBehavior::onBehaviourAdd(%this)
+function MeanderBehavior::onBehaviorAdd(%this)
 {
 	%speed = getRandom(%this.minSpeed, %this.maxSpeed);
 	
@@ -39,7 +39,7 @@ function MeanderBehavior::onBehaviourAdd(%this)
 function MeanderBehavior::recycle(%this, %side)
 {
 	%speed = getRandom(%this.minSpeed, %this.maxSpeed);
-	%this.owner.setLinearVelocityY*getRandom(-3, 3));
+	%this.owner.setLinearVelocityY(getRandom(-3, 3));
 	%this.owner.setPositionY(getRandom(-15, 15));
 	
 	if (%side $= "left")

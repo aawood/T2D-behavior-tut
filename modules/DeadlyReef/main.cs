@@ -53,8 +53,12 @@ function DeadlyReef::create( %this )
     createAquariumEffects(mainScene);
 
     DeadlyReef.spawnPlayerFish();
+	
 	for (%i = 0; %i < 2; %i++)
 		DeadlyReef.spawnFishFood();
+	
+	for (%i = 0; %i < 5; %i++)
+		DeadlyReef.spawnEnemyFish();
 }
 
 //-----------------------------------------------------------------------------
@@ -123,4 +127,34 @@ function DeadlyReef::spawnFishFood()
 	
 	mainScene.add(%food);
 	%food.nutrition = 10;
+}
+
+function DeadlyReef::spawnEnemyFish(%this)
+{
+	%position = getRandom(-55, 55) SPC getRandom(-20, 20);
+	%index = getRandom(0, 5);
+	%anim = getUnit(getFishAnimationList(), %index, ",");
+	
+	%fishSize = getFishSize(%anim);
+	
+	%fish = new Sprite()
+	{
+		Animation = %anim;
+		class = "NPCFishClass";
+		position = %position;
+		size = %fishSize;
+		SceneLayer = "15";
+		SceneGroup = "14";
+		CollisionCallback = true;
+	};
+	
+	%fish.createPolygonBoxCollisionShape(%fishSize);
+	%fish.setCollisionShapeIsSensor(0, true);
+	%fish.setCollisionGroups("10 15");
+	%fish.fixedAngle = true;
+	
+	%move = MeanderBehavior.createInstance();
+	%fish.addBehavior(%move);
+	
+	mainScene.add(%fish);
 }
